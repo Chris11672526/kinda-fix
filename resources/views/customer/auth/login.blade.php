@@ -73,7 +73,7 @@
                     <div x-data="{ show: false }">
                         <div class="flex items-center justify-between">
                             <label for="password" class="block text-[10px] font-black uppercase tracking-widest text-neutral-400">Password</label>
-                            <a href="{{ route('password.request') }}" class="text-[10px] font-bold text-red-400 transition hover:text-red-300">Forgot?</a>
+                            <span class="text-[10px] font-bold text-neutral-500">Contact staff for reset</span>
                         </div>
                         <div class="relative mt-2">
                             <input x-bind:type="show ? 'text' : 'password'" id="password" name="password" required
