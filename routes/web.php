@@ -14,7 +14,6 @@ Route::get('/', function () {
         'plans'     => DB::table('membership_plans')->where('is_active', 1)->get(),
         'equipment' => DB::table('equipment')->limit(8)->get(),
         'trainers'  => DB::table('trainers')->where('status', 'Active')->get(),
-        'classes'   => DB::table('classes')->where('is_active', 1)->get(),
     ]);
 })->name('home');
 
@@ -53,34 +52,37 @@ Route::get('/dashboard', function () {
 
 // ── Customer routes ────────────────────────────────────────────────────────
 Route::middleware(['auth', 'role:member'])->prefix('customer')->name('customer.')->group(function () {
-    Route::get('/dashboard',                [CustomerDashboardController::class, 'index'])->name('dashboard');
-    Route::get('/payments',                 [CustomerDashboardController::class, 'payments'])->name('payments');
-    Route::post('/payments/{payment}/pay',  [CustomerDashboardController::class, 'payPending'])->name('payments.pay');
-    Route::post('/membership/cancel',       [CustomerDashboardController::class, 'cancelMembership'])->name('membership.cancel');
-    Route::get('/classes',                  [CustomerDashboardController::class, 'classes'])->name('classes');
-    Route::post('/classes/enroll',          [CustomerDashboardController::class, 'enrollClass'])->name('classes.enroll');
-    Route::get('/equipment',                [CustomerDashboardController::class, 'equipment'])->name('equipment');
-    Route::get('/trainers',                 [CustomerDashboardController::class, 'trainers'])->name('trainers');
-    Route::post('/trainers/apply',          [CustomerDashboardController::class, 'applyTrainer'])->name('trainers.apply');
+    Route::get('/dashboard',                          [CustomerDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/payments',                           [CustomerDashboardController::class, 'payments'])->name('payments');
+    Route::post('/payments/{payment}/pay',            [CustomerDashboardController::class, 'payPending'])->name('payments.pay');
+    Route::post('/membership/cancel',                 [CustomerDashboardController::class, 'cancelMembership'])->name('membership.cancel');
+    Route::get('/equipment',                          [CustomerDashboardController::class, 'equipment'])->name('equipment');
+    Route::get('/trainers',                           [CustomerDashboardController::class, 'trainers'])->name('trainers');
+    Route::post('/trainers/apply',                    [CustomerDashboardController::class, 'applyTrainer'])->name('trainers.apply');
+    Route::post('/trainers/{assignment}/cancel',      [CustomerDashboardController::class, 'cancelTrainer'])->name('trainers.cancel');
 });
 
 // ── Admin routes ───────────────────────────────────────────────────────────
 Route::middleware(['auth', 'role:admin,staff'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard',                        [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard',                          [AdminDashboardController::class, 'index'])->name('dashboard');
 
     // Members CRUD
-    Route::get('/members',                          [AdminDashboardController::class, 'members'])->name('members');
-    Route::post('/members/store',                   [AdminDashboardController::class, 'storeMember'])->name('members.store');
-    Route::post('/members/{id}/update',             [AdminDashboardController::class, 'updateMember'])->name('members.update');
-    Route::post('/members/{id}/delete',             [AdminDashboardController::class, 'deleteMember'])->name('members.delete');
+    Route::get('/members',                            [AdminDashboardController::class, 'members'])->name('members');
+    Route::post('/members/store',                     [AdminDashboardController::class, 'storeMember'])->name('members.store');
+    Route::post('/members/{id}/update',               [AdminDashboardController::class, 'updateMember'])->name('members.update');
+    Route::post('/members/{id}/delete',               [AdminDashboardController::class, 'deleteMember'])->name('members.delete');
 
     // Payments
-    Route::get('/payments',                         [AdminDashboardController::class, 'payments'])->name('payments');
-    Route::post('/payments/{id}/update',            [AdminDashboardController::class, 'updatePayment'])->name('payments.update');
+    Route::get('/payments',                           [AdminDashboardController::class, 'payments'])->name('payments');
+    Route::post('/payments/{id}/update',              [AdminDashboardController::class, 'updatePayment'])->name('payments.update');
+
+    // Trainers & applications
+    Route::get('/trainers',                           [AdminDashboardController::class, 'trainers'])->name('trainers');
+    Route::post('/trainers/{id}/update',              [AdminDashboardController::class, 'approveTrainer'])->name('trainers.update');
 
     // Other views
-    Route::get('/sessions',                         [AdminDashboardController::class, 'sessions'])->name('sessions');
-    Route::get('/equipment',                        [AdminDashboardController::class, 'equipment'])->name('equipment');
-    Route::post('/equipment/{id}/update',           [AdminDashboardController::class, 'updateEquipment'])->name('equipment.update');
-    Route::get('/reports',                          [AdminDashboardController::class, 'reports'])->name('reports');
+    Route::get('/sessions',                           [AdminDashboardController::class, 'sessions'])->name('sessions');
+    Route::get('/equipment',                          [AdminDashboardController::class, 'equipment'])->name('equipment');
+    Route::post('/equipment/{id}/update',             [AdminDashboardController::class, 'updateEquipment'])->name('equipment.update');
+    Route::get('/reports',                            [AdminDashboardController::class, 'reports'])->name('reports');
 });

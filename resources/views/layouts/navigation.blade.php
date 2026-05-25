@@ -14,7 +14,6 @@
     $customerLinks = [
         ['label' => 'Overview',  'route' => 'customer.dashboard'],
         ['label' => 'Payments',  'route' => 'customer.payments'],
-        ['label' => 'Classes',   'route' => 'customer.classes'],
         ['label' => 'Equipment', 'route' => 'customer.equipment'],
         ['label' => 'Trainers',  'route' => 'customer.trainers'],
     ];
@@ -25,6 +24,7 @@
         ['label' => 'Payments',  'route' => 'admin.payments'],
         ['label' => 'Sessions',  'route' => 'admin.sessions'],
         ['label' => 'Equipment', 'route' => 'admin.equipment'],
+        ['label' => 'Trainers',  'route' => 'admin.trainers'],
         ['label' => 'Reports',   'route' => 'admin.reports'],
     ];
 

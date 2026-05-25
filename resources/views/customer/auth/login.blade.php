@@ -132,15 +132,6 @@
 
             </div>
 
-            {{-- Info Box --}}
-            <div class="mt-6 rounded-xl border border-white/8 bg-neutral-900/50 p-4 text-center">
-                <p class="text-xs text-neutral-400">
-                    <span class="font-bold">Demo Account:</span><br>
-                    Email: <code class="text-red-300">admin@fitzone.com</code><br>
-                    Password: <code class="text-red-300">password</code>
-                </p>
-            </div>
-
         </div>
     </main>
 

@@ -266,17 +266,7 @@
                                 <p class="mt-0.5 text-xs text-neutral-500">Certified coaches for guidance</p>
                             </div>
                         </div>
-                        <div class="flex items-start gap-3">
-                            <div class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-600/15 text-red-400">
-                                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 1112 2.944a11.954 11.954 0 018.618 3.04A12.02 12.02 0 0121 12c0 .502-.047.984-.135 1.452m-1.36 0A11.959 11.959 0 0112 2.944m0 0a11.954 11.954 0 01-8.618 3.04m0 0A12.02 12.02 0 003 12c0 4.978 4.029 9 9 9 1.798 0 3.498-.29 5.096-.817m1.313.824A12.027 12.027 0 0121 12"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <p class="text-sm font-black">Classes Weekly</p>
-                                <p class="mt-0.5 text-xs text-neutral-500">Zumba, Yoga, CrossFit & more</p>
-                            </div>
-                        </div>
+                      
                         <div class="flex items-start gap-3">
                             <div class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-red-600/15 text-red-400">
                                 <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">

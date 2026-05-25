@@ -22,17 +22,30 @@ class AdminDashboardController extends Controller
             ->orderBy('month')
             ->get();
 
+        $monthlyRevenueRaw = DB::table('payments')
+            ->selectRaw("DATE_FORMAT(payment_date, '%Y-%m') as month, SUM(total_paid) as total")
+            ->where('status', 'Paid')
+            ->groupBy('month')
+            ->orderBy('month')
+            ->pluck('total', 'month');
+
+        $monthlyRevenue = $monthlyRegistrations->pluck('month')->map(
+            fn($m) => (float) ($monthlyRevenueRaw[$m] ?? 0)
+        );
+
         return view('admin.dashboard', [
-            'totalCustomers'     => DB::table('customers')->whereNull('deleted_at')->count(),
-            'activeMemberships'  => DB::table('memberships')->where('status', 'Active')->count(),
-            'expiredMemberships' => DB::table('memberships')->where('status', 'Expired')->count(),
-            'pendingPayments'    => DB::table('payments')->where('status', 'Pending')->count(),
-            'totalRevenue'       => DB::table('payments')->where('status', 'Paid')->sum('total_paid') ?? 0,
-            'sessionCount'       => DB::table('attendance')->count(),
-            'customers'          => DB::table('customers')->whereNull('deleted_at')->latest()->limit(6)->get(),
-            'payments'           => DB::table('payments')->latest('payment_date')->limit(5)->get(),
-            'monthlyLabels'      => $monthlyRegistrations->pluck('month'),
-            'monthlyValues'      => $monthlyRegistrations->pluck('total'),
+            'totalCustomers'      => DB::table('customers')->whereNull('deleted_at')->count(),
+            'activeMemberships'   => DB::table('memberships')->where('status', 'Active')->count(),
+            'expiredMemberships'  => DB::table('memberships')->where('status', 'Expired')->count(),
+            'pendingPayments'     => DB::table('payments')->where('status', 'Pending')->count(),
+            'totalRevenue'        => DB::table('payments')->where('status', 'Paid')->sum('total_paid') ?? 0,
+            'sessionCount'        => DB::table('attendance')->count(),
+            'customers'           => DB::table('customers')->whereNull('deleted_at')->latest()->limit(6)->get(),
+            'payments'            => DB::table('payments')->latest('payment_date')->limit(5)->get(),
+            'monthlyLabels'       => $monthlyRegistrations->pluck('month'),
+            'monthlyValues'       => $monthlyRegistrations->pluck('total'),
+            'monthlyRevenue'      => $monthlyRevenue,
+            'membershipBreakdown' => DB::table('memberships')->selectRaw('status, COUNT(*) as total')->groupBy('status')->get(),
         ]);
     }
 

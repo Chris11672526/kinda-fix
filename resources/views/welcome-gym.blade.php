@@ -355,99 +355,6 @@
             line-height: 1.5;
         }
 
-        /* Classes Section */
-        .classes-section {
-            background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
-        }
-
-        .class-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .class-card {
-            background: #2d2d2d;
-            border-radius: 15px;
-            overflow: hidden;
-            border: 2px solid #404040;
-            transition: all 0.3s ease;
-        }
-
-        .class-card:hover {
-            border-color: var(--primary);
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(220, 20, 60, 0.3);
-        }
-
-        .class-header {
-            background: linear-gradient(135deg, var(--primary) 0%, #ff6b6b 100%);
-            padding: 30px;
-            text-align: center;
-        }
-
-        .class-name {
-            font-size: 1.8rem;
-            font-weight: 900;
-            margin-bottom: 10px;
-        }
-
-        .class-trainer {
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        .class-body {
-            padding: 25px;
-        }
-
-        .class-info {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #404040;
-        }
-
-        .class-info-item {
-            text-align: center;
-        }
-
-        .class-info-label {
-            color: #888;
-            font-size: 0.8rem;
-            margin-bottom: 5px;
-        }
-
-        .class-info-value {
-            color: var(--accent);
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
-        .class-desc {
-            color: #ddd;
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .enroll-btn {
-            width: 100%;
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .enroll-btn:hover {
-            background: #b01030;
-        }
-
         /* Trainers Section */
         .trainers-section {
             background: #1a1a1a;
@@ -602,9 +509,6 @@
                         <a class="nav-link" href="#equipment">Equipment</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#classes">Classes</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="#trainers">Trainers</a>
                     </li>
                     <li class="nav-item">
@@ -703,60 +607,6 @@
         </div>
     </section>
 
-    <!-- Classes Section -->
-    <section class="classes-section section" id="classes">
-        <div class="container">
-            <div class="section-title">
-                <h2>PROGRAMS</h2>
-                <p class="subtitle">Classes and guided sessions</p>
-            </div>
-
-            <div class="class-grid">
-                @forelse ($classes as $class)
-                    <div class="class-card">
-                        <div class="class-header">
-                            <div class="class-name">{{ $class->name }}</div>
-                            <div class="class-trainer">
-                                <i class="bi bi-person-fill"></i> Trainer
-                            </div>
-                        </div>
-                        <div class="class-body">
-                            <div class="class-info">
-                                <div class="class-info-item">
-                                    <div class="class-info-label">Schedule</div>
-                                    <div class="class-info-value">{{ $class->schedule_day }}</div>
-                                </div>
-                                <div class="class-info-item">
-                                    <div class="class-info-label">Time</div>
-                                    <div class="class-info-value">{{ $class->start_time }}</div>
-                                </div>
-                                <div class="class-info-item">
-                                    <div class="class-info-label">Capacity</div>
-                                    <div class="class-info-value">{{ $class->max_capacity }}</div>
-                                </div>
-                            </div>
-                            <p class="class-desc">{{ $class->description ?? 'Join this amazing class!' }}</p>
-                            @if ($class->fee > 0)
-                                <p style="color: var(--accent); font-weight: bold; margin-bottom: 15px;">
-                                    ₱{{ number_format($class->fee, 2) }} per class
-                                </p>
-                            @else
-                                <p style="color: #888; margin-bottom: 15px;">Included in membership</p>
-                            @endif
-                            <button class="enroll-btn" onclick="window.location.href='{{ route('customer.register') }}'">
-                                <i class="bi bi-play-circle"></i> Enroll Now
-                            </button>
-                        </div>
-                    </div>
-                @empty
-                    <div class="col-12 text-center" style="color: #888; padding: 40px;">
-                        No classes available
-                    </div>
-                @endforelse
-            </div>
-        </div>
-    </section>
-
     <!-- Trainers Section -->
     <section class="trainers-section section" id="trainers">
         <div class="container">
@@ -807,7 +657,6 @@
                 <ul>
                     <li><a href="#plans">Membership Plans</a></li>
                     <li><a href="#equipment">Equipment</a></li>
-                    <li><a href="#classes">Classes</a></li>
                     <li><a href="#trainers">Trainers</a></li>
                 </ul>
             </div>
